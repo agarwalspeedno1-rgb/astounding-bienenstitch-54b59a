@@ -4,16 +4,26 @@ import { COMPANY, SERVICES, whatsappUrl } from '@/data/company'
 import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 
 export const Route = createFileRoute('/services')({
-  head: () => ({
-    meta: [
-      { title: `Relocation Services | ${COMPANY.name}` },
-      {
-        name: 'description',
-        content:
-          'Household shifting, office relocation, car & bike transport, warehousing, local and intercity moving services across Hyderabad and Pan-India.',
-      },
-    ],
-  }),
+  head: () => {
+    const pageTitle = `Relocation Services | ${COMPANY.name} - Hyderabad & Pan-India`
+    const pageDesc =
+      'Comprehensive moving services: household shifting, corporate office relocation, car & bike transportation, and secure warehousing across Hyderabad and Pan-India.'
+    const pageUrl = `${COMPANY.siteUrl}/services`
+    return {
+      meta: [
+        { title: pageTitle },
+        { name: 'description', content: pageDesc },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:description', content: pageDesc },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${COMPANY.siteUrl}/logo.png` },
+        { name: 'twitter:title', content: pageTitle },
+        { name: 'twitter:description', content: pageDesc },
+        { name: 'twitter:image', content: `${COMPANY.siteUrl}/logo.png` },
+      ],
+      links: [{ rel: 'canonical', href: pageUrl }],
+    }
+  },
   component: ServicesPage,
 })
 

@@ -4,16 +4,26 @@ import { COMPANY, whatsappUrl } from '@/data/company'
 import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 
 export const Route = createFileRoute('/about')({
-  head: () => ({
-    meta: [
-      { title: `About Us | ${COMPANY.name}` },
-      {
-        name: 'description',
-        content:
-          'Agarwal Speed Packers & Movers is a trusted household and corporate relocation provider operating from Alwal, Secunderabad, serving all of Hyderabad and Pan-India.',
-      },
-    ],
-  }),
+  head: () => {
+    const pageTitle = `About Us | ${COMPANY.name} - Packers & Movers Hyderabad`
+    const pageDesc =
+      'Agarwal Speed Packers & Movers is a trusted household and corporate relocation provider operating from Alwal, Secunderabad, serving all of Hyderabad and Pan-India.'
+    const pageUrl = `${COMPANY.siteUrl}/about`
+    return {
+      meta: [
+        { title: pageTitle },
+        { name: 'description', content: pageDesc },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:description', content: pageDesc },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${COMPANY.siteUrl}/logo.png` },
+        { name: 'twitter:title', content: pageTitle },
+        { name: 'twitter:description', content: pageDesc },
+        { name: 'twitter:image', content: `${COMPANY.siteUrl}/logo.png` },
+      ],
+      links: [{ rel: 'canonical', href: pageUrl }],
+    }
+  },
   component: AboutPage,
 })
 

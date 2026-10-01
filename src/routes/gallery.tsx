@@ -4,16 +4,26 @@ import { MapPin } from 'lucide-react'
 import { COMPANY, GALLERY_ITEMS } from '@/data/company'
 
 export const Route = createFileRoute('/gallery')({
-  head: () => ({
-    meta: [
-      { title: `Work Gallery | ${COMPANY.name}` },
-      {
-        name: 'description',
-        content:
-          'Photos of our packing, loading, furniture assembly, and vehicle transport work across Hyderabad and Secunderabad.',
-      },
-    ],
-  }),
+  head: () => {
+    const pageTitle = `Work Gallery & Moving Photos | ${COMPANY.name}`
+    const pageDesc =
+      'Photos of our packing, loading, furniture assembly, and vehicle transport work across Hyderabad and Secunderabad.'
+    const pageUrl = `${COMPANY.siteUrl}/gallery`
+    return {
+      meta: [
+        { title: pageTitle },
+        { name: 'description', content: pageDesc },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:description', content: pageDesc },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${COMPANY.siteUrl}/logo.png` },
+        { name: 'twitter:title', content: pageTitle },
+        { name: 'twitter:description', content: pageDesc },
+        { name: 'twitter:image', content: `${COMPANY.siteUrl}/logo.png` },
+      ],
+      links: [{ rel: 'canonical', href: pageUrl }],
+    }
+  },
   component: GalleryPage,
 })
 

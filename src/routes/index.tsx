@@ -7,16 +7,26 @@ import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 import { useTrackModal } from '@/lib/track-modal-context'
 
 export const Route = createFileRoute('/')({
-  head: () => ({
-    meta: [
-      { title: `${COMPANY.name} | Packers and Movers in Hyderabad & Secunderabad` },
-      {
-        name: 'description',
-        content:
-          'Government-approved packers and movers based in Alwal, Secunderabad, serving all of Hyderabad. Household shifting, office relocation, car transport, and warehousing with zero-damage guarantee.',
-      },
-    ],
-  }),
+  head: () => {
+    const pageTitle = `${COMPANY.name} | Best Packers and Movers in Hyderabad & Secunderabad`
+    const pageDesc =
+      'Government-approved packers and movers based in Alwal, Secunderabad, serving all of Hyderabad. Household shifting, office relocation, car transport, and warehousing with zero-damage guarantee.'
+    const pageUrl = `${COMPANY.siteUrl}/`
+    return {
+      meta: [
+        { title: pageTitle },
+        { name: 'description', content: pageDesc },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:description', content: pageDesc },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${COMPANY.siteUrl}/logo.png` },
+        { name: 'twitter:title', content: pageTitle },
+        { name: 'twitter:description', content: pageDesc },
+        { name: 'twitter:image', content: `${COMPANY.siteUrl}/logo.png` },
+      ],
+      links: [{ rel: 'canonical', href: pageUrl }],
+    }
+  },
   component: HomePage,
 })
 

@@ -2,22 +2,49 @@ import { createFileRoute } from '@tanstack/react-router'
 import { COMPANY, FAQS } from '@/data/company'
 
 export const Route = createFileRoute('/faq')({
-  head: () => ({
-    meta: [
-      { title: `FAQ | ${COMPANY.name}` },
-      {
-        name: 'description',
-        content:
-          'Answers to common questions about booking, pricing, insurance, and prohibited items for packing and moving services in Hyderabad.',
-      },
-    ],
-  }),
+  head: () => {
+    const pageTitle = `Frequently Asked Questions (FAQ) | ${COMPANY.name}`
+    const pageDesc =
+      'Answers to common questions about booking, pricing, insurance, and prohibited items for packing and moving services in Hyderabad.'
+    const pageUrl = `${COMPANY.siteUrl}/faq`
+    return {
+      meta: [
+        { title: pageTitle },
+        { name: 'description', content: pageDesc },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:description', content: pageDesc },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${COMPANY.siteUrl}/logo.png` },
+        { name: 'twitter:title', content: pageTitle },
+        { name: 'twitter:description', content: pageDesc },
+        { name: 'twitter:image', content: `${COMPANY.siteUrl}/logo.png` },
+      ],
+      links: [{ rel: 'canonical', href: pageUrl }],
+    }
+  },
   component: FAQPage,
 })
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+}
 
 function FAQPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-8 px-4 py-8 font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="space-y-2 border-b border-slate-200 pb-6 text-center">
         <span className="rounded bg-red-50 px-2.5 py-1 text-xs font-bold uppercase text-red-600">
           Got Questions?

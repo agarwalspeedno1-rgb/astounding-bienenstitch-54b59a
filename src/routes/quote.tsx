@@ -3,15 +3,26 @@ import { COMPANY } from '@/data/company'
 import { QuoteForm } from '@/components/QuoteForm'
 
 export const Route = createFileRoute('/quote')({
-  head: () => ({
-    meta: [
-      { title: `Get Instant Moving Quote | ${COMPANY.name}` },
-      {
-        name: 'description',
-        content: 'Get an instant estimate for household shifting, office relocation, or car transport in Hyderabad.',
-      },
-    ],
-  }),
+  head: () => {
+    const pageTitle = `Get Free Moving Quote & Cost Calculator | ${COMPANY.name}`
+    const pageDesc =
+      'Get an instant shifting quote or calculate relocation volume and pricing for household goods, office moving, and vehicle transport in Hyderabad.'
+    const pageUrl = `${COMPANY.siteUrl}/quote`
+    return {
+      meta: [
+        { title: pageTitle },
+        { name: 'description', content: pageDesc },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:description', content: pageDesc },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${COMPANY.siteUrl}/logo.png` },
+        { name: 'twitter:title', content: pageTitle },
+        { name: 'twitter:description', content: pageDesc },
+        { name: 'twitter:image', content: `${COMPANY.siteUrl}/logo.png` },
+      ],
+      links: [{ rel: 'canonical', href: pageUrl }],
+    }
+  },
   component: QuotePage,
 })
 

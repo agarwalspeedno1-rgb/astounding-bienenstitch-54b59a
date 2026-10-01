@@ -16,9 +16,14 @@ const siteDescription =
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'MovingCompany',
+  '@id': `${COMPANY.siteUrl}/#organization`,
   name: COMPANY.name,
+  url: COMPANY.siteUrl,
+  logo: `${COMPANY.siteUrl}/logo.png`,
+  image: `${COMPANY.siteUrl}/logo.png`,
   telephone: COMPANY.phone,
   email: COMPANY.email,
+  priceRange: '₹₹',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Ambedkar Nagar Colony, Padmavathi Nagar Colony',
@@ -27,8 +32,34 @@ const localBusinessSchema = {
     postalCode: '500015',
     addressCountry: 'IN',
   },
-  areaServed: 'Hyderabad, Secunderabad, Telangana',
-  priceRange: '₹₹',
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '17.5028',
+    longitude: '78.5085',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ],
+      opens: '08:00',
+      closes: '22:00',
+    },
+  ],
+  areaServed: [
+    { '@type': 'City', name: 'Hyderabad' },
+    { '@type': 'City', name: 'Secunderabad' },
+    { '@type': 'State', name: 'Telangana' },
+    { '@type': 'Country', name: 'India' },
+  ],
+  hasMap: COMPANY.mapUrl,
 }
 
 export const Route = createRootRoute({
@@ -49,6 +80,23 @@ export const Route = createRootRoute({
         content: siteDescription,
       },
       {
+        name: 'robots',
+        content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+      },
+      {
+        name: 'author',
+        content: COMPANY.name,
+      },
+      {
+        name: 'keywords',
+        content:
+          'packers and movers Hyderabad, packers and movers Secunderabad, household shifting Alwal, home relocation Hyderabad, car transport Hyderabad, office shifting, warehouse storage Secunderabad',
+      },
+      {
+        property: 'og:site_name',
+        content: COMPANY.name,
+      },
+      {
         property: 'og:title',
         content: siteName,
       },
@@ -61,8 +109,50 @@ export const Route = createRootRoute({
         content: 'website',
       },
       {
+        property: 'og:url',
+        content: COMPANY.siteUrl,
+      },
+      {
+        property: 'og:image',
+        content: `${COMPANY.siteUrl}/logo.png`,
+      },
+      {
+        property: 'og:locale',
+        content: 'en_IN',
+      },
+      {
         name: 'twitter:card',
         content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: siteName,
+      },
+      {
+        name: 'twitter:description',
+        content: siteDescription,
+      },
+      {
+        name: 'twitter:image',
+        content: `${COMPANY.siteUrl}/logo.png`,
+      },
+      {
+        name: 'geo.region',
+        content: 'IN-TG',
+      },
+      {
+        name: 'geo.placename',
+        content: 'Secunderabad, Hyderabad, Telangana',
+      },
+    ],
+    links: [
+      {
+        rel: 'canonical',
+        href: COMPANY.siteUrl,
+      },
+      {
+        rel: 'icon',
+        href: '/favicon.ico',
       },
     ],
   }),

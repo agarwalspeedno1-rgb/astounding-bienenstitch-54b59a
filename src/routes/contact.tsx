@@ -5,15 +5,25 @@ import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 import { QuoteForm } from '@/components/QuoteForm'
 
 export const Route = createFileRoute('/contact')({
-  head: () => ({
-    meta: [
-      { title: `Contact Us | ${COMPANY.name}` },
-      {
-        name: 'description',
-        content: `Visit our office at ${COMPANY.shortAddress}, or call, email, or WhatsApp us to book a free moving quote.`,
-      },
-    ],
-  }),
+  head: () => {
+    const pageTitle = `Contact Us | ${COMPANY.name} - Alwal, Secunderabad`
+    const pageDesc = `Visit our office at ${COMPANY.shortAddress}, or call, email, or WhatsApp us to book a free moving quote.`
+    const pageUrl = `${COMPANY.siteUrl}/contact`
+    return {
+      meta: [
+        { title: pageTitle },
+        { name: 'description', content: pageDesc },
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:description', content: pageDesc },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${COMPANY.siteUrl}/logo.png` },
+        { name: 'twitter:title', content: pageTitle },
+        { name: 'twitter:description', content: pageDesc },
+        { name: 'twitter:image', content: `${COMPANY.siteUrl}/logo.png` },
+      ],
+      links: [{ rel: 'canonical', href: pageUrl }],
+    }
+  },
   component: ContactPage,
 })
 

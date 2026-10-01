@@ -10,6 +10,7 @@ export const COMPANY = {
   shortAddress: 'Padmavathi Nagar Colony, Alwal, Secunderabad - 500015',
   mapUrl:
     'https://maps.google.com/?q=Ambedkar+Nagar+Colony+Padmavathi+Nagar+Colony+Alwal+Secunderabad+Telangana+500015',
+  siteUrl: 'https://agarwalspeed.com',
   whatsappNumber: '919142776932',
   hours: 'Monday - Sunday: 8:00 AM - 10:00 PM',
 } as const
